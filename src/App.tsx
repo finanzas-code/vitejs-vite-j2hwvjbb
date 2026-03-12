@@ -14,7 +14,7 @@ const MORALIS_BASE = 'https://deep-index.moralis.io/api/v2.2';
 const FRANKFURTER = 'https://api.frankfurter.app';
 // Pool Aave v3 de Reental en Polygon (contrato custom, NO el pool oficial de Aave)
 // Confirmado en tx: https://polygonscan.com/tx/0x50db8d6a84b...
-const REENTAL_AAVE_POOL = '0x67dC8037Db6309Dd5571D82c65F5f593F7da1505';
+const _REENTAL_AAVE_POOL = '0x67dC8037Db6309Dd5571D82c65F5f593F7da1505';
 const POLYGON_RPC = 'https://polygon-rpc.com';
 // Imágenes del membrete Reental (base64 embebido)
 const IMG_HEADER =
@@ -622,7 +622,7 @@ function matchAaveTokenToCatalog(tok: any, catalog: LLCRow[]): LLCRow | null {
 
 // Balance del aToken en la wallet al momento actual
 // (los aTokens son 1:1 con el underlying, no hace falta ajuste de decimales adicional)
-async function getAaveBalance(
+async function _getAaveBalance(
   wallet: string,
   aTokenAddr: string
 ): Promise<number> {
@@ -1126,7 +1126,7 @@ export default function Modelo720() {
   const [results, setResults] = useState<TokenResult[]>([]);
   const [meta, setMeta] = useState<{
     ecbRate: number | null;
-    ecbDate: string | null;
+    ecbDate: string | null | undefined | undefined;
   }>({ ecbRate: null, ecbDate: null });
   const [loading, setLoading] = useState(false);
   const [progress, setProgress] = useState('');
