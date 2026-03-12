@@ -213,7 +213,7 @@ async function generarPDFMembretado(results: TokenResult[], meta: { ecbRate: num
     await new Promise((res, rej) => {
       const s = document.createElement('script');
       s.src = 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js';
-      s.onload = () => res();
+      s.onload = () => res(undefined as any);
       s.onerror = () => rej(new Error('jsPDF load failed'));
       document.head.appendChild(s);
     });
@@ -288,14 +288,14 @@ async function generarPDFMembretado(results: TokenResult[], meta: { ecbRate: num
     doc.text('Polygon PoS', sx + 10, sy + 11.5, { align: 'center' });
   };
 
-  const byWallet = {};
+  const byWallet: Record<string, TokenResult[]> = {};
   for (const r of results) {
     if (!byWallet[r.walletAddr]) byWallet[r.walletAddr] = [];
     byWallet[r.walletAddr].push(r);
   }
   const totalEur = results.reduce((s, r) => s + r.valorEur, 0);
   const fmt = (n) => n.toLocaleString('es-ES', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-  const entries = Object.entries(byWallet);
+  const entries: [string, TokenResult[]][] = Object.entries(byWallet);
 
   entries.forEach(([walletAddr, wResults], wi) => {
     if (wi > 0) doc.addPage('a4', 'landscape');
