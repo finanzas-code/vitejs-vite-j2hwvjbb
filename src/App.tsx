@@ -14,7 +14,7 @@ const MORALIS_BASE = 'https://deep-index.moralis.io/api/v2.2';
 const FRANKFURTER = 'https://api.frankfurter.app';
 // Pool Aave v3 de Reental en Polygon (contrato custom, NO el pool oficial de Aave)
 // Confirmado en tx: https://polygonscan.com/tx/0x50db8d6a84b...
-const _REENTAL_AAVE_POOL = '0x67dC8037Db6309Dd5571D82c65F5f593F7da1505';
+async function _getAaveBalance( '0x67dC8037Db6309Dd5571D82c65F5f593F7da1505';
 const POLYGON_RPC = 'https://polygon-rpc.com';
 // Imágenes del membrete Reental (base64 embebido)
 const IMG_HEADER =
@@ -1771,7 +1771,7 @@ export default function Modelo720() {
                   onClick={() =>
                     generarPDFMembretado(
                       results,
-                      meta,
+                      {...meta, ecbDate: meta.ecbDate ?? ''}
                       String(ejercicio),
                       nif,
                       totalPorWallet
